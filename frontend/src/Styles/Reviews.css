@@ -1,0 +1,121 @@
+/* Reviews.css */
+
+.review-section {
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+  
+  .rw-text-content {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .rw-text-title {
+    margin: 16px 0;
+    color: #6F7074;
+    font-family: 'Rubik', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+  }
+  
+  .rw-text-num {
+    color: #01998C;
+  }
+  
+  .rw-text-desc {
+    margin: 16px 0;
+    color: black;
+    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    line-height: 1.8rem;
+  }
+  
+  .rw-carousel-item {
+    padding: 20px; /* Adjust padding as needed */
+    text-align: center; /* Center align carousel item content */
+  }
+  
+  .rw-text-format {
+    margin: 40px auto; /* Center and provide margin around the review message */
+    position: relative;
+  }
+  
+  .rw-text-quote1,
+  .rw-text-quote2 {
+    color: #01998C;
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    position: absolute;
+  }
+  
+  .rw-text-quote1 {
+    top: -18px;
+    left: -24px;
+  }
+  
+  .rw-text-quote2 {
+    bottom: -24px;
+    right: -18px;
+  }
+  
+  .rw-authors {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+  }
+  
+  .rw-reviewer-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+    color: black;
+  }
+  
+  .rw-reviewer-place {
+    color: #6F7074;
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+  }
+
+  button.carousel-control-prev,
+  button.carousel-control-next {
+    background-color: #01998C;
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    margin: auto;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+  
+  
+  button.carousel-control-prev {
+    left: 40px; /* Adjust as needed */
+  }
+  
+  button.carousel-control-next {
+    right: 40px; /* Adjust as needed */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .rw-text-desc {
+      font-size: 20px; /* Adjust for smaller screens */
+    }
+  }
+  
