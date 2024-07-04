@@ -1,11 +1,22 @@
+version: '3.8'
+
 services:
   api:
     build: ./backend        
     ports:
       - "8000:8000"
     volumes:
-      - ./api:/api
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+      - ./backend:/backend
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   web:
     build: ./frontend
@@ -13,3 +24,17 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/frontend
+    command: serve -s build -l 3000
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  app-network:
+    driver: bridge
