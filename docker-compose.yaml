@@ -1,40 +1,22 @@
 version: '3.8'
 
 services:
-  api:
-    build: ./backend        
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/backend
-    command: python manage.py runserver 0.0.0.0:8000
-    environment:
-      - DJANGO_SETTINGS_MODULE=backend.settings
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
-  web:
-    build: ./frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
       - ./frontend:/frontend
-    command: serve -s build -l 3000
-    environment:
-      - NODE_ENV=development
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-networks:
-  app-network:
-    driver: bridge
+    depends_on:
+      - backend

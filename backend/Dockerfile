@@ -1,24 +1,23 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.9-slim
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+FROM python:3.11
 
 # Set the working directory in the container
 WORKDIR /backend
 
-# Copy the requirements file into the container
-COPY requirements.txt ./
+# Copy requirements file
+COPY ./requirements.txt /backend/requirements.txt
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade -r /backend/requirements.txt
 
 # Copy the rest of the application code
 COPY . .
 
-# Expose the port the app runs on
 EXPOSE 8000
 
-# Set the entrypoint to an empty command
-ENTRYPOINT []
+# Debugging step: show files in the container
+RUN ls -la
+
+# Debugging step: show installed packages
+RUN pip list
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
