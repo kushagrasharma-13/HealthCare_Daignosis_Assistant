@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Doctor from "../Assets/doctor_home.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarCheck, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate  } from "react-router-dom";
@@ -70,7 +69,7 @@ function Hero() {
         </div>
 
         <div className="hero-image-section">
-          <img className="hero-image1" src={Doctor} alt="Doctor" />
+          <img className="hero-image1" src='.\src\Assets\doctor_home.png' alt="Doctor" />
         </div>
       </div>
 
