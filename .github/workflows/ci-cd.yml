@@ -56,13 +56,16 @@ jobs:
       run: |
         docker-compose -f docker-compose.yaml up -d
 
-    - name: Wait for services to be ready
+    - name: Wait for backend service to be ready
       run: |
-        while ! docker-compose -f docker-compose.yaml exec backend curl -sSf http://localhost:8000 > /dev/null; do
+        while ! curl -sSf http://localhost:8000 > /dev/null; do
           echo "Waiting for backend to be ready..."
           sleep 5
         done
-        while ! docker-compose -f docker-compose.yaml exec frontend curl -sSf http://localhost:3000 > /dev/null; do
+
+    - name: Wait for frontend service to be ready
+      run: |
+        while ! curl -sSf http://localhost:3000 > /dev/null; do
           echo "Waiting for frontend to be ready..."
           sleep 5
         done
