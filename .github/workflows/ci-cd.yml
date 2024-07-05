@@ -58,14 +58,14 @@ jobs:
 
     - name: Wait for backend service to be ready
       run: |
-        while ! curl -sSf http://localhost:8000 > /dev/null; do
+        until curl -sSf http://0.0.0.0:8000 > /dev/null; do
           echo "Waiting for backend to be ready..."
           sleep 5
         done
 
     - name: Wait for frontend service to be ready
       run: |
-        while ! curl -sSf http://localhost:3000 > /dev/null; do
+        until curl -sSf http://0.0.0.0:3000 > /dev/null; do
           echo "Waiting for frontend to be ready..."
           sleep 5
         done
