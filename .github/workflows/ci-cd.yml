@@ -1,0 +1,94 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push backend image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./backend
+        push: true
+        tags: username/backend:latest
+
+    - name: Build and push frontend image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./frontend
+        push: true
+        tags: username/frontend:latest
+
+    - name: Compose up
+      run: |
+        docker-compose -f docker-compose.yaml up -d
+
+    - name: Run tests
+      run: |
+        docker-compose -f docker-compose.yaml run backend pytest
+        docker-compose -f docker-compose.yaml run frontend npm test
+
+    - name: Compose down
+      run: |
+        docker-compose -f docker-compose.yaml down
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install SSH client
+      run: sudo apt-get install -y openssh-client
+
+    - name: Add SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Copy files to EC2
+      run: |
+        scp -o StrictHostKeyChecking=no -r . ubuntu@your-ec2-public-ip:/home/ubuntu/app
+
+    - name: Deploy on EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@54.88.15.70 << 'EOF'
+          cd /home/ubuntu/app
+          docker-compose -f docker-compose.yaml pull
+          docker-compose -f docker-compose.yaml up -d
+        EOF
