@@ -43,14 +43,14 @@ jobs:
       with:
         context: ./backend
         push: true
-        tags: username/backend:latest
+        tags: healthcare_diagnosis_assistant_backend:latest
 
     - name: Build and push frontend image
       uses: docker/build-push-action@v2
       with:
         context: ./frontend
         push: true
-        tags: username/frontend:latest
+        tags: healthcare_diagnosis_assistant_frontend:latest
 
     - name: Compose up
       run: |
