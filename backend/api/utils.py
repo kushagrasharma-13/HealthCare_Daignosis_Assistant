@@ -1,18 +1,15 @@
 import os
-import json
 from dotenv import load_dotenv
+from .ip import GROQAI_API_KEY
 from autogen import AssistantAgent, UserProxyAgent
-
-# load_dotenv()
+load_dotenv()
 
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY')
-print("#########################   GROQ API   #############################")
+
 if GROQ_API_KEY==None:
-    with open('backend/config.json') as file:
-        data = json.load(file)
-        GROQ_API_KEY = data.get('GROQ_API_KEY')
-print("#########################   GROQ API   #############################")
+    GROQ_API_KEY = GROQAI_API_KEY
 print(GROQ_API_KEY)
+
 llm_config = {
     "model": "llama3-70b-8192",
     "api_key": GROQ_API_KEY,
