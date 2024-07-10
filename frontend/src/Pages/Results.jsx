@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
+import Markdown from "markdown-to-jsx";
 import "../Styles/Result.css";
 
 function Results() {
@@ -12,17 +13,23 @@ function Results() {
       <div className="results-container">
         <section>
           <h3>Medical</h3>
-            <p className="result-text">{output.medical}</p>
+          <div className="result-text">
+            <Markdown>{output.medical}</Markdown>
+          </div>
         </section>
 
         <section>
           <h3>Nutrition</h3>
-          <p className="result-text">{output.medical}</p>
+          <div className="result-text">
+            <Markdown>{output.nutrition}</Markdown>
+          </div>
         </section>
 
         <section>
           <h3>Psychological</h3>
-          <p className="result-text">{output.medical}</p>
+          <div className="result-text">
+            <Markdown>{output.psychological}</Markdown>
+          </div>
         </section>
       </div>
       <Link to="/" className="home-link">Back to Home</Link>
