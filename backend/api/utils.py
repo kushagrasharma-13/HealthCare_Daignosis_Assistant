@@ -2,13 +2,8 @@ import os
 from dotenv import load_dotenv
 from .ip import GROQ_API_KEY
 from autogen import AssistantAgent, UserProxyAgent
-load_dotenv()
-print(GROQ_API_KEY)
-GROQAI_API_KEY=os.environ.get('GROQ_API_KEY')
 
-if GROQAI_API_KEY==None:
-    GROQAI_API_KEY = GROQ_API_KEY
-print(GROQAI_API_KEY)
+GROQAI_API_KEY=GROQ_API_KEY
 
 llm_config = {
     "model": "llama3-70b-8192",
