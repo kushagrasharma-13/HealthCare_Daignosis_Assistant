@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../Styles/DiagnosForm.css"
+import "../Styles/DiagnosForm.css";
+// import example_output from "./example_output.json";
 
 function DiagnosForm() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [age, setAge] = useState(0);
-  const [gender, setGender] = useState("Male"); 
+  const [gender, setGender] = useState("Male");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -18,13 +19,12 @@ function DiagnosForm() {
       name,
       symptoms,
       age,
-      gender
+      gender,
     };
-    //navigate("/results");
-
+    console.log(formData);
     try {
-      const backendUrl = `http://${process.env.PUBLIC_IP}:8000/api/health-recommendation/`;
-      // const response = await fetch("http://localhost:8000/api/health-recommendation/", {     //URL for local testing
+      // const backendUrl = `http://${process.env.PUBLIC_IP}:8000/api/health-recommendation/`;
+      const backendUrl = "http://localhost:8000/api/health-recommendation/";     //URL for local testing
       const response = await fetch(backendUrl, {
         method: "POST",
         headers: {
@@ -32,22 +32,27 @@ function DiagnosForm() {
         },
         body: JSON.stringify(formData),
       });
-
+      console.log(response);
       if (!response.ok) {
         throw new Error("Failed to submit form data");
       }
 
+      // const responseData = JSON.stringify(example_output, null, 4);
       const responseData = await response.json(); 
 
 
       toast.success("Request for Assistance Submitted!", {
-        position: toast.POSITION.TOP_CENTER,
+        position: "top-center",
+        transition: Slide,
       });
 
       navigate("/results", { state: { responseData } });
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error("Failed to submit form. Please try again later.");
+      toast.error("Failed to submit form. Please try again later.", {
+        position: "top-center",
+        transition: Slide,
+      });
     }
   };
 

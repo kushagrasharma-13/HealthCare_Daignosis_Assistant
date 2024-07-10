@@ -50,14 +50,14 @@
 // export default Results;
 
 
-
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
+import { marked } from "marked";
 import "../Styles/Result.css";
 
 function Results() {
   const location = useLocation();
-  const { responseData } = location.state;
+  const responseData = location.state?.responseData ? JSON.parse(location.state.responseData) : {};
 
   return (
     <div className="results-page">
@@ -65,23 +65,35 @@ function Results() {
       <div className="results-container">
         <section>
           <h3>Medical</h3>
-          {responseData.medical.map((item, index) => (
-            <p key={index} className="result-text">{item}</p>
-          ))}
+          {Array.isArray(responseData.medical) ? (
+            responseData.medical.map((item, index) => (
+              <p key={index} className="result-text" dangerouslySetInnerHTML={{ __html: marked(item) }}></p>
+            ))
+          ) : (
+            <p className="result-text">No medical results available.</p>
+          )}
         </section>
 
         <section>
           <h3>Nutrition</h3>
-          {responseData.nutrition.map((item, index) => (
-            <p key={index} className="result-text">{item}</p>
-          ))}
+          {Array.isArray(responseData.nutrition) ? (
+            responseData.nutrition.map((item, index) => (
+              <p key={index} className="result-text" dangerouslySetInnerHTML={{ __html: marked(item) }}></p>
+            ))
+          ) : (
+            <p className="result-text">No nutrition results available.</p>
+          )}
         </section>
 
         <section>
           <h3>Psychological</h3>
-          {responseData.psychological.map((item, index) => (
-            <p key={index} className="result-text">{item}</p>
-          ))}
+          {Array.isArray(responseData.psychological) ? (
+            responseData.psychological.map((item, index) => (
+              <p key={index} className="result-text" dangerouslySetInnerHTML={{ __html: marked(item) }}></p>
+            ))
+          ) : (
+            <p className="result-text">No psychological results available.</p>
+          )}
         </section>
       </div>
       <Link to="/" className="home-link">Back to Home</Link>

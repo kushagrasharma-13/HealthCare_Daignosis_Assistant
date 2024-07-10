@@ -6,17 +6,17 @@ load_dotenv()
 def form_reponse(age, gender, symptoms, medical_history):
     class MedicalAssistantAgent(AssistantAgent):
         def __init__(self, name="medical_assistant", llm_config=None):
-            system_message = "You are a medical assistant. Provide medical remedies for diseases based on the user's symptoms, age, and gender."
+            system_message = "You are a medical assistant. Provide medical remedies for diseases based on the user's symptoms, age, and gender. Make sure the content is in proper markdown format with appropriate line breaks "
             super().__init__(name=name, system_message=system_message, llm_config=llm_config)
 
     class NutritionAssistantAgent(AssistantAgent):
         def __init__(self, name="nutrition_assistant", llm_config=None):
-            system_message = "You are a nutrition assistant. Provide dietary advice and meal plans based on the user's nutritional needs and goals."
+            system_message = "You are a nutrition assistant. Provide dietary advice and meal plans based on the user's nutritional needs and goals. Make sure the content is in proper markdown format with appropriate line breaks"
             super().__init__(name=name, system_message=system_message, llm_config=llm_config)
 
     class PsychologicalAssistantAgent(AssistantAgent):
         def __init__(self, name="psychological_assistant", llm_config=None):
-            system_message = "You are a psychological assistant. Provide mental health support and coping strategies based on the user's emotional state and experiences."
+            system_message = "You are a psychological assistant. Provide mental health support and coping strategies based on the user's emotional state and experiences. Make sure the content is in proper markdown format with appropriate line breaks"
             super().__init__(name=name, system_message=system_message, llm_config=llm_config)
 
     class MedicalUserProxyAgent(UserProxyAgent):
