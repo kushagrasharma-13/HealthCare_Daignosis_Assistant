@@ -27,10 +27,10 @@ def health_recommendation(request):
             )
             user.save()
     response = form_reponse(user_data['age'], user_data['gender'], user_data['symptoms'], medical_history)
-    print(response)
     user.medical_history = concise_report(response)
     user.save()
     # with open(f'./api/example_output.json', 'r') as file:
     #     response = json.load(file)
+    print(response)
     return Response(response)
 
