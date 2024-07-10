@@ -23,9 +23,8 @@ function DiagnosForm() {
     //navigate("/results");
 
     try {
-      // const ip = execSync('curl -s http://169.254.169.254/latest/meta-data/local-ipv4').toString().trim();
       const backendUrl = `http://${process.env.PUBLIC_IP}:8000/api/health-recommendation/`;
-      // const response = await fetch("http://localhost:8000/api/health-recommendation/", {
+      // const response = await fetch("http://localhost:8000/api/health-recommendation/", {     //URL for local testing
       const response = await fetch(backendUrl, {
         method: "POST",
         headers: {
