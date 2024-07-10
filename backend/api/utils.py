@@ -3,37 +3,49 @@ from dotenv import load_dotenv
 from autogen import AssistantAgent, UserProxyAgent
 load_dotenv()
 
+GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
+print("#########################   GROQ API   #############################")
+print(GROQAI_API_KEY)
+config_list = [
+    {
+        "model": "llama3-70b-8192",
+        "api_key": os.environ.get("GROQ_API_KEY"),
+        "api_type": "groq",
+    }
+]
+
 def form_reponse(age, gender, symptoms, medical_history):
     class MedicalAssistantAgent(AssistantAgent):
         def __init__(self, name="medical_assistant", llm_config=None):
             system_message = "You are a medical assistant. Provide medical remedies for diseases based on the user's symptoms, age, and gender. Make sure the content is in proper markdown format with appropriate line breaks "
-            super().__init__(name=name, system_message=system_message, llm_config=llm_config)
+            super().__init__(name=name, system_message=system_message, llm_config={"config_list": config_list})
 
     class NutritionAssistantAgent(AssistantAgent):
         def __init__(self, name="nutrition_assistant", llm_config=None):
             system_message = "You are a nutrition assistant. Provide dietary advice and meal plans based on the user's nutritional needs and goals. Make sure the content is in proper markdown format with appropriate line breaks"
-            super().__init__(name=name, system_message=system_message, llm_config=llm_config)
+            super().__init__(name=name, system_message=system_message, llm_config={"config_list": config_list})
 
     class PsychologicalAssistantAgent(AssistantAgent):
         def __init__(self, name="psychological_assistant", llm_config=None):
             system_message = "You are a psychological assistant. Provide mental health support and coping strategies based on the user's emotional state and experiences. Make sure the content is in proper markdown format with appropriate line breaks"
-            super().__init__(name=name, system_message=system_message, llm_config=llm_config)
+            super().__init__(name=name, system_message=system_message, llm_config={"config_list": config_list})
 
     class MedicalUserProxyAgent(UserProxyAgent):
         def __init__(self, name="user_proxy", llm_config=None):
-            super().__init__(name=name, llm_config=llm_config, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
+            super().__init__(name=name, llm_config={"config_list": config_list}, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
 
 
-    GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
-    llm_config = {
-        "model": "llama3-70b-8192",
-        "api_key": GROQAI_API_KEY,
-        "base_url": "https://api.groq.com/openai/v1"
-    }
+    # GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
+    # llm_config = {
+    #     "model": "llama3-70b-8192",
+    #     "api_key": GROQAI_API_KEY,
+    #     "base_url": "https://api.groq.com/openai/v1"
+    # }
 
-    medical_assistant = MedicalAssistantAgent(llm_config=llm_config)
-    nutrition_assistant = NutritionAssistantAgent(llm_config=llm_config)
-    psychological_assistant = PsychologicalAssistantAgent(llm_config=llm_config)
+
+    medical_assistant = MedicalAssistantAgent(llm_config={"config_list": config_list})
+    nutrition_assistant = NutritionAssistantAgent(llm_config={"config_list": config_list})
+    psychological_assistant = PsychologicalAssistantAgent(llm_config={"config_list": config_list})
 
     medical_user_proxy = MedicalUserProxyAgent()
     user_message = (
@@ -76,20 +88,20 @@ def concise_report(medical_response):
         class ConsiceAgent(AssistantAgent):
             def __init__(self, name="consice_assistant", llm_config=None):
                 system_message = "You are given medical data of a user, You work is to reduce it to a consice and effective medical history report with exactly less than 25 words."
-                super().__init__(name=name, system_message=system_message, llm_config=llm_config)
+                super().__init__(name=name, system_message=system_message, llm_config={"config_list": config_list})
 
         class ConsiceUserProxyAgent(UserProxyAgent):
             def __init__(self, name="user_proxy", llm_config=None):
-                super().__init__(name=name, llm_config=llm_config, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
+                super().__init__(name=name, llm_config={"config_list": config_list}, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
 
-        GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
-        llm_config = {
-            "model": "llama3-70b-8192",
-            "api_key": GROQAI_API_KEY,
-            "base_url": "https://api.groq.com/openai/v1"
-        }
+        # GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
+        # llm_config = {
+        #     "model": "llama3-70b-8192",
+        #     "api_key": GROQAI_API_KEY,
+        #     "base_url": "https://api.groq.com/openai/v1"
+        # }
 
-        consice_assistant = ConsiceAgent(llm_config=llm_config)
+        consice_assistant = ConsiceAgent(llm_config={"config_list": config_list})
         consice_user_proxy = ConsiceUserProxyAgent()
         user_message = (
             f"Medical Response: {medical_response}"
@@ -100,20 +112,20 @@ def concise_report(medical_response):
         class ConsiceAgent(AssistantAgent):
             def __init__(self, name="consice_assistant", llm_config=None):
                 system_message = "You are given medical data of a user, You work is to reduce it to a consice and effective medical history report with exactly less than 25 words."
-                super().__init__(name=name, system_message=system_message, llm_config=llm_config)
+                super().__init__(name=name, system_message=system_message, llm_config={"config_list": config_list})
 
         class ConsiceUserProxyAgent(UserProxyAgent):
             def __init__(self, name="user_proxy", llm_config=None):
-                super().__init__(name=name, llm_config=llm_config, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
+                super().__init__(name=name, llm_config={"config_list": config_list}, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
 
-        GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
-        llm_config = {
-            "model": "llama3-70b-8192",
-            "api_key": GROQAI_API_KEY,
-            "base_url": "https://api.groq.com/openai/v1"
-        }
+        # GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
+        # llm_config = {
+        #     "model": "llama3-70b-8192",
+        #     "api_key": GROQAI_API_KEY,
+        #     "base_url": "https://api.groq.com/openai/v1"
+        # }
 
-        consice_assistant = ConsiceAgent(llm_config=llm_config)
+        consice_assistant = ConsiceAgent(llm_config={"config_list": config_list})
         consice_user_proxy = ConsiceUserProxyAgent()
         user_message = (
             f"Medical Response: {medical_response}"
@@ -124,20 +136,20 @@ def concise_report(medical_response):
         class ConsiceAgent(AssistantAgent):
             def __init__(self, name="consice_assistant", llm_config=None):
                 system_message = "You are given medical data of a user, You work is to reduce it to a consice and effective medical history report with exactly less than 25 words."
-                super().__init__(name=name, system_message=system_message, llm_config=llm_config)
+                super().__init__(name=name, system_message=system_message, llm_config={"config_list": config_list})
 
         class ConsiceUserProxyAgent(UserProxyAgent):
             def __init__(self, name="user_proxy", llm_config=None):
-                super().__init__(name=name, llm_config=llm_config, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
+                super().__init__(name=name, llm_config={"config_list": config_list}, human_input_mode="NEVER", max_consecutive_auto_reply=0, code_execution_config=False)
 
-        GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
-        llm_config = {
-            "model": "llama3-70b-8192",
-            "api_key": GROQAI_API_KEY,
-            "base_url": "https://api.groq.com/openai/v1"
-        }
+        # GROQAI_API_KEY = os.environ.get("GROQAI_API_KEY")
+        # llm_config = {
+        #     "model": "llama3-70b-8192",
+        #     "api_key": GROQAI_API_KEY,
+        #     "base_url": "https://api.groq.com/openai/v1"
+        # }
 
-        consice_assistant = ConsiceAgent(llm_config=llm_config)
+        consice_assistant = ConsiceAgent(llm_config={"config_list": config_list})
         consice_user_proxy = ConsiceUserProxyAgent()
         user_message = (
             f"Medical Response: {medical_response}"
