@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Styles/DiagnosForm.css";
-// import example_output from "./example_output.json";
+import {PUBLIC_IP} from '../../config.json'
 
 function DiagnosForm() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function DiagnosForm() {
     };
     // console.log(formData);
     try {
-      const backendUrl = `http://${process.env.REACT_APP_PUBLIC_IP}:8000/api/health-recommendation/`;
+      const backendUrl = `http://${PUBLIC_IP}:8000/api/health-recommendation/`;
       // const backendUrl = "http://localhost:8000/api/health-recommendation/";     //URL for local testing
       const response = await fetch(backendUrl, {
         method: "POST",
