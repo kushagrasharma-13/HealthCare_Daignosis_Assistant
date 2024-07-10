@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from .ip import GROQ_API_KEY
 from autogen import AssistantAgent, UserProxyAgent
 load_dotenv()
-
+print(GROQ_API_KEY)
 GROQAI_API_KEY=os.environ.get('GROQ_API_KEY')
 
 if GROQAI_API_KEY==None:
