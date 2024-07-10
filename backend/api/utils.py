@@ -8,7 +8,7 @@ load_dotenv()
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY')
 print("#########################   GROQ API   #############################")
 if GROQ_API_KEY==None:
-    with open('config.json') as file:
+    with open('./config.json') as file:
         data = json.load(file)
         GROQ_API_KEY = data.get('GROQ_API_KEY')
 print("#########################   GROQ API   #############################")
