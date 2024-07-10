@@ -12,7 +12,7 @@ if GROQ_API_KEY==None:
         data = json.load(file)
         GROQ_API_KEY = data.get('GROQ_API_KEY')
 print("#########################   GROQ API   #############################")
-        
+print(GROQ_API_KEY)
 llm_config = {
     "model": "llama3-70b-8192",
     "api_key": GROQ_API_KEY,
