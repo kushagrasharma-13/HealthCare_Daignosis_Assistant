@@ -23,6 +23,7 @@ function DiagnosForm() {
     };
     // console.log(formData);
     try {
+      console.log(`${PUBLIC_IP}`);
       const backendUrl = `http://${PUBLIC_IP}:8000/api/health-recommendation/`;
       // const backendUrl = "http://localhost:8000/api/health-recommendation/";     //URL for local testing
       const response = await fetch(backendUrl, {
