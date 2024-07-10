@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Styles/DiagnosForm.css";
-import {PUBLIC_IP} from './config.json'
+import {PUBLIC_IP} from '../../config.json'
 
 function DiagnosForm() {
   const navigate = useNavigate();
