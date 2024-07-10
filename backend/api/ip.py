@@ -1,1 +1,1 @@
-GROQAI_API_KEY="gsk"
+GROQ_API_KEY="gsk"
