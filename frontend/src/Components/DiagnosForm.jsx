@@ -21,7 +21,7 @@ function DiagnosForm() {
       age,
       gender,
     };
-    console.log(formData);
+    // console.log(formData);
     try {
       // const backendUrl = `http://${process.env.PUBLIC_IP}:8000/api/health-recommendation/`;
       const backendUrl = "http://localhost:8000/api/health-recommendation/";     //URL for local testing
@@ -32,21 +32,25 @@ function DiagnosForm() {
         },
         body: JSON.stringify(formData),
       });
-      console.log(response);
+
+      const jsonResponse = await response.json();
+      const output = {
+        "medical": jsonResponse.medical[0],
+        "nutrition": jsonResponse.nutrition[0],
+        "psychological": jsonResponse.psychological[0]
+      };
+      console.log(output);
+
       if (!response.ok) {
         throw new Error("Failed to submit form data");
       }
-
-      // const responseData = JSON.stringify(example_output, null, 4);
-      const responseData = await response.json(); 
-
 
       toast.success("Request for Assistance Submitted!", {
         position: "top-center",
         transition: Slide,
       });
 
-      navigate("/results", { state: { responseData } });
+      navigate("/results", { state: { output } });
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Failed to submit form. Please try again later.", {
