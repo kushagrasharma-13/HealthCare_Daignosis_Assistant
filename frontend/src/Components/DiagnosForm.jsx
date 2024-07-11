@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Styles/DiagnosForm.css";
-import {PUBLIC_IP} from '../../config.json'
+import { PUBLIC_IP } from '../../config.json'
 
 function DiagnosForm() {
   const navigate = useNavigate();
@@ -11,9 +11,11 @@ function DiagnosForm() {
   const [symptoms, setSymptoms] = useState("");
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState("Male");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const formData = {
       name,
@@ -21,12 +23,10 @@ function DiagnosForm() {
       age,
       gender,
     };
-    // console.log(formData);
+
     try {
       console.log(`${PUBLIC_IP}`);
       const backendUrl = `http://${PUBLIC_IP}:8000/api/health-recommendation/`;
-      // const backendUrl = "http://localhost:8000/api/health-recommendation/";     //URL for local testing
-      console.log(backendUrl);
       const response = await fetch(backendUrl, {
         method: "POST",
         headers: {
@@ -59,6 +59,8 @@ function DiagnosForm() {
         position: "top-center",
         transition: Slide,
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -122,8 +124,8 @@ function DiagnosForm() {
           </label>
 
           <br />
-          <button type="submit" className="text-appointment-btn">
-            Get Assistance
+          <button type="submit" className="text-appointment-btn" disabled={isLoading}>
+            {isLoading ? <div className="spinner"></div> : "Get Assistance"}
           </button>
         </form>
       </div>
