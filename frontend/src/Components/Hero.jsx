@@ -13,7 +13,7 @@ function Hero() {
   };
 
   const handleBookAppointmentClick = () => {
-    navigate("/diagnos");
+    navigate("/diagnose");
   };
 
   useEffect(() => {

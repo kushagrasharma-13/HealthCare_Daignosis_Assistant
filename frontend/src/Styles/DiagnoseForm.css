@@ -1,0 +1,166 @@
+/* Body and general styles */
+body {
+    background-color: white; /* Set background color to white */
+    color: #333; /* Text color */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.appointment-form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.form-container {
+    background-color: whitesmoke; /* Darker background for form container */
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px; /* Limit form width */
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-content label {
+    margin-bottom: 5px;
+}
+
+.form-content .input-wrapper,
+.form-content .textarea-wrapper,
+.form-content .select-wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-content input,
+.form-content textarea,
+.form-content select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    background-color: #fff; /* Change background color to white */
+    color: #333; /* Change text color to a dark shade for better readability */
+    margin-top: 5px;
+}
+
+.form-content textarea {
+    min-height: 100px; /* Adjust as needed */
+}
+
+.form-content button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.form-content button:hover {
+    background-color: #0056b3;
+}
+
+.legal-footer {
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+}
+
+.legal-footer p {
+    font-size: 14px;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: #28a745;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #4f8a8b;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Styles for the input container with microphone icon */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  width: 100%;
+  padding-right: 30px; /* Add padding to make space for the icon */
+}
+
+.mic-icon {
+  position: absolute;
+  right: 1%; /* Position the icon inside the input field */
+  top: 50%; /* Center the icon vertically */
+  transform: translateY(-50%); /* Center the icon vertically */
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.mic-icon.recording {
+  color: red; /* Change color to red when recording */
+}
+
+/* Styles for the textarea container with microphone icon */
+.textarea-container {
+  position: relative;
+}
+
+.textarea-container textarea {
+  width: 100%;
+  padding-right: 30px; /* Add padding to make space for the icon */
+}
+
+.textarea-container .mic-icon {
+  position: absolute;
+  right: 1%; /* Position the icon inside the textarea field */
+  top: 20%; /* Align the icon at the top */
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.textarea-container .mic-icon.recording {
+  color: red; /* Change color to red when recording */
+}

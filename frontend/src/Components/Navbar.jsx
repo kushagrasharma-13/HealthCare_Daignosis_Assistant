@@ -31,22 +31,22 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <a href="#services" className="navbar-links">
+          <a href="/#services" className="navbar-links">
             Services
           </a>
         </li>
         <li>
-          <a href="#about" className="navbar-links">
+          <a href="/#about" className="navbar-links">
             About
           </a>
         </li>
         <li>
-          <a href="#reviews" className="navbar-links">
+          <a href="/#reviews" className="navbar-links">
             Reviews
           </a>
         </li>
         <li>
-            <a href="#contact" className="navbar-links" >
+            <a href="/#contact" className="navbar-links" >
               Contact
             </a>
           </li>
@@ -65,22 +65,22 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <a onClick={openNav} href="#services">
+            <a onClick={openNav} href="/#services">
               Services
             </a>
           </li>
           <li>
-            <a onClick={openNav} href="#about">
+            <a onClick={openNav} href="/#about">
               About
             </a>
           </li>
           <li>
-            <a onClick={openNav} href="#reviews">
+            <a onClick={openNav} href="/#reviews">
               Reviews
             </a>
           </li>
           <li>
-            <a onClick={openNav} href="#contact">
+            <a onClick={openNav} href="/#contact">
               Contact
             </a>
           </li>

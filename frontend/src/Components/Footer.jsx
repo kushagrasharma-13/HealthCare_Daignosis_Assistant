@@ -22,19 +22,19 @@ function Footer() {
           <p className="ft-list-title">Services</p>
           <ul className="ft-list-items">
             <li>
-              <a href="#services">Emergency Care</a>
+              <a href="/#contacts">Emergency Care</a>
             </li>
             <li>
-              <a href="#services">Heart Disease</a>
+              <a href="/#contacts">Heart Disease</a>
             </li>
             <li>
-              <a href="#services">Dental Care</a>
+              <a href="/#contacts">Dental Care</a>
             </li>
             <li>
-              <a href="#services">Prescription</a>
+              <a href="/#contacts">Prescription</a>
             </li>
             <li>
-              <a href="#services">Insights for doctors</a>
+              <a href="/#contacts">Insights for doctors</a>
             </li>
           </ul>
         </div>
@@ -67,7 +67,7 @@ function Footer() {
               <a href="mailto:sharmakushagra295@gmail.com">support@medicalassistance.com</a>
             </li>
             <li>
-              <a href="tel:+012 3456 7890">+012 3456 7890</a>
+              <a href="tel:+91 955 748 9354">+91 955 748 9354</a>
             </li>
           </ul>
         </div>
